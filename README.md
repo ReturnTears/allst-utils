@@ -8,9 +8,11 @@
 ##push 消息推送
         消息推送使用的友盟平台
                         (开发文档可以查看Umeng官方文档)
+
 ##websocket 数据推送
         与其他服务或平台对接数据
                         SpringBoot本队WS有很好的支持
+        
 
 ##Socket
 
