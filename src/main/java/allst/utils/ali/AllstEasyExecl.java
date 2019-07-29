@@ -1,5 +1,15 @@
 package allst.utils.ali;
 
+/*import com.alibaba.easyexcel.test.util.FileUtil;
+import com.alibaba.excel.EasyExcelFactory;
+import com.alibaba.excel.metadata.Sheet;*/
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
+import static jdk.nashorn.internal.objects.Global.print;
+
 /**
  * easyexcel
  *          JAVA解析Excel工具easyexcel
@@ -12,5 +22,17 @@ package allst.utils.ali;
  * @since 2019-07-29 下午 11:35
  */
 public class AllstEasyExecl {
+    public static void main(String[] args) {
 
+    }
+
+    /**
+     * 07版本excel读数据量少于1千行数据，内部采用回调方法.
+     */
+    private void simpleReadListStringV2007() throws IOException {
+        /*InputStream inputStream = FileUtil.getResourcesFileInputStream("2007.xlsx");
+        List<Object> data = EasyExcelFactory.read(inputStream, new Sheet(1, 0));
+        inputStream.close();
+        print(data);*/
+    }
 }
