@@ -36,8 +36,8 @@ public class FileUtil {
     private static MimeMap mimeMap = null;
 
     public static void main(String[] args) {
-        String s1 = "e:/data/a1.txt";
-        String s2 = "e:/data/a1.txt";
+        String s1 = "E:/TestData/file.log";
+        String s2 = "E:/TestData/file2.log";
         System.out.println(moveFile(s1, s2, true));
     }
 
@@ -129,8 +129,6 @@ public class FileUtil {
      * 判断后缀名是否是图片  "jpg", "jpeg", "bmp", "png", "gif", "ico"
      *
      * @param suffix 会通过.切取字符串
-     *
-     * @return
      */
     public static boolean isImageSuffix(String suffix) {
         if (!StringUtil.checkEmpty(suffix)) return false;
@@ -162,8 +160,6 @@ public class FileUtil {
 
     /**
      * 获取系统临时目录.通过java.io.tmpdir属性获取
-     *
-     * @return
      */
     public static String getTempDir() {
         String dir = System.getProperty(TEMP_DIR);

@@ -7,7 +7,6 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -78,8 +77,11 @@ public class QrCodeUtil {
     public String createQrCodeBASE64(String content) throws IOException, WriterException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         createQrCode(outputStream, content);
-        BASE64Encoder encoder = new BASE64Encoder();
-        return encoder.encode(outputStream.toByteArray());
+        // todo
+        // BASE64Encoder encoder = new BASE64Encoder();
+        // return encoder.encode(outputStream.toByteArray());
+
+        return "";
     }
 
     /**
