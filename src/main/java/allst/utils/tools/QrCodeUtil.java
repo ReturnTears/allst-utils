@@ -118,8 +118,7 @@ public class QrCodeUtil {
      *
      * @return 二维码内容
      */
-    public static String readQrCode(InputStream inputStream)
-            throws IOException, NotFoundException, ChecksumException, FormatException {
+    public static String readQrCode(InputStream inputStream) throws Exception {
         // 从输入流中获取字符串信息
         BufferedImage image = ImageIO.read(inputStream);
         // 将图像转换为二进制位图源
@@ -138,8 +137,7 @@ public class QrCodeUtil {
      *
      * @return 二维码内容
      */
-    public static String readQrCode(String inFilePath)
-            throws NotFoundException, ChecksumException, FormatException, IOException {
+    public static String readQrCode(String inFilePath) throws Exception {
         InputStream inputStream = new FileInputStream(new File(inFilePath));
         return readQrCode(inputStream);
     }
