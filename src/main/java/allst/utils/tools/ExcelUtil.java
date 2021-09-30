@@ -25,7 +25,10 @@ public class ExcelUtil {
     }
 
     /**
+     * 在try {} catch {} 的catch块中写业务逻辑，这种逻辑存在一定的风险，若A调用了的B的某个工具类,B捕获了异常且做了处理没有抛出来，
+     * 那么这时候可能A就执行不到catch块中的逻辑， 这时就出现了逻辑Bug，
      *
+     * 建议：catch语句块中尽量不要写业务逻辑，就打印写异常日志就可以了
      */
     public static List<List<Object>> readRows(InputStream is, int startRowIndex, int rowCount) throws IOException {
         Workbook wb = null;
@@ -49,11 +52,7 @@ public class ExcelUtil {
     }
 
     /**
-     * @param sheet
-     * @param startRowIndex
-     * @param rowCount
      *
-     * @return
      */
     public static List<List<Object>> readRows(Sheet sheet, int startRowIndex, int rowCount) {
         List<List<Object>> rowList = new ArrayList<List<Object>>();
@@ -110,7 +109,7 @@ public class ExcelUtil {
 
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        List<List<Object>> rows = readRows("d:/1.xls", 0, 10);
+        List<List<Object>> rows = readRows("E:/data/1.xls", 0, 10);
         for (List<Object> row : rows) {
             for (Object cell : row) {
                 System.out.print(cell + "\t");

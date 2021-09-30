@@ -166,7 +166,7 @@ public class JxlExcelUtil {
     }
 
     /**
-     *
+     * 写入Excel数据到输出流
      */
     public static void writeExcel(String sheetName, List<Object> title, List<List<Object>> data, OutputStream os, int colOffset, int rowOffset) {
         // 打开文件
@@ -178,7 +178,6 @@ public class JxlExcelUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public static void writeExcel(WritableWorkbook book, String sheetName, int sheetIndex, List<Object> title, List<List<Object>> data) {
@@ -186,11 +185,6 @@ public class JxlExcelUtil {
     }
 
     /**
-     * @param book
-     * @param sheetName
-     * @param sheetIndex
-     * @param title
-     * @param data
      * @param colOffset  列偏移
      * @param rowOffset  行偏移
      */
@@ -234,9 +228,6 @@ public class JxlExcelUtil {
 
     /**
      * 将数据对象转换成列表数据
-     *
-     * @param list
-     * @param names
      *
      * @return 转换出来仅包含数据内容
      */

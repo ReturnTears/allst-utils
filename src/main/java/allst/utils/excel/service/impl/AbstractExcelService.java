@@ -26,11 +26,13 @@ import java.util.Map;
 public abstract class AbstractExcelService implements BaseExcelService {
     public static String SPLIT_STR = "-";
 
-    @Override
-    public ByteArrayOutputStream exportExcelT(String title, List<ExportBean> exportBeans, List<?> dataList) {
-        return exportExcel(title, exportBeans, listBeanToListMap(dataList));
-    }
-
+    /**
+     * 导出数据为EXCEL
+     *
+     * @param title     标题
+     * @param exportBeans 导出字段
+     * @param dataList  数据列表
+     */
     @Override
     public ByteArrayOutputStream exportExcel(String title, List<ExportBean> exportBeans, List<Map<String, Object>> dataList) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -40,13 +42,13 @@ public abstract class AbstractExcelService implements BaseExcelService {
         return bos;
     }
 
+    @Override
+    public ByteArrayOutputStream exportExcelT(String title, List<ExportBean> exportBeans, List<?> dataList) {
+        return exportExcel(title, exportBeans, listBeanToListMap(dataList));
+    }
+
     /**
      * 构建excel导出数据
-     *
-     * @param exportBeans
-     * @param dataList
-     *
-     * @return
      */
     public List<List<Object>> buildData(List<ExportBean> exportBeans, List<Map<String, Object>> dataList) {
         List<List<Object>> datas = new ArrayList<>();
@@ -74,8 +76,6 @@ public abstract class AbstractExcelService implements BaseExcelService {
         }
         return titles;
     }
-
-    ;
 
     @SuppressWarnings({"unchecked"})
     private Map<String, Object> beanToMap(Object t) {
@@ -105,7 +105,7 @@ public abstract class AbstractExcelService implements BaseExcelService {
     @Override
     public ByteArrayOutputStream exportExcelTemplate(List<ExportBean> exportBeanList, Map<String, Object> extendData) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        List<ExcelTemplate> excelTemplateList = getexoprtExcelTemplateData(exportBeanList, extendData);
+        List<ExcelTemplate> excelTemplateList = getExportExcelTemplateData(exportBeanList, extendData);
         PoiExcelUtil.createExcelTemplate(bos, excelTemplateList);
         return bos;
     }
@@ -115,14 +115,13 @@ public abstract class AbstractExcelService implements BaseExcelService {
         return PoiExcelUtil.getTableDataFromExcel(fileIn);
     }
 
-    public List<ExcelTemplate> getexoprtExcelTemplateData(List<ExportBean> exportBeanList, Map<String, Object> extendData) {
+    public List<ExcelTemplate> getExportExcelTemplateData(List<ExportBean> exportBeanList, Map<String, Object> extendData) {
         List<ExcelTemplate> excelTemplateList = new ArrayList<>();
         ExcelTemplate excelTemplate;
         int index = 0;
         for (ExportBean field : exportBeanList) {
             excelTemplate = new ExcelTemplate();
             excelTemplate.setTableField(field.getTableField());
-            ;
             excelTemplate.setName(field.getName());
             excelTemplate.setIndex(index);
             excelTemplate.setField(field.getField());

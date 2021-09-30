@@ -27,17 +27,17 @@ import java.util.zip.GZIPOutputStream;
  * @since 2021年09月
  */
 public class FileUtil {
-    private static Logger log = LoggerFactory.getLogger(FileUtil.class);
+    private static final Logger log = LoggerFactory.getLogger(FileUtil.class);
     /**
      * 常用图片文件后缀
      */
-    private static String[] IMAGE_SUFFIX = new String[]{"jpg", "jpeg", "bmp", "png", "gif", "ico"};
-    private static String TEMP_DIR = "java.io.tmpdir";
+    private static final String[] IMAGE_SUFFIX = new String[]{"jpg", "jpeg", "bmp", "png", "gif", "ico"};
+    private static final String TEMP_DIR = "java.io.tmpdir";
     private static MimeMap mimeMap = null;
 
     public static void main(String[] args) {
-        String s1 = "e:/a1.txt";
-        String s2 = "f:/a1.txt";
+        String s1 = "e:/data/a1.txt";
+        String s2 = "e:/data/a1.txt";
         System.out.println(moveFile(s1, s2, true));
     }
 
@@ -45,8 +45,6 @@ public class FileUtil {
      * 获取当前jdk或者jre的路径
      * 仅到    /jre或者jdk  级.
      * 例如: 返回  D:/02_Development/jdk1.8.0_101x64/jre
-     *
-     * @return
      */
     public static String getJdkPath() {
         String path = System.getProperty("java.home");
@@ -58,8 +56,6 @@ public class FileUtil {
 
     /**
      * 获取jdk 的bin路径
-     *
-     * @return
      */
     public static String getJdkBinPath() {
         String path = System.getProperty("sun.boot.library.path");
@@ -79,9 +75,6 @@ public class FileUtil {
      *
      * @param fromPath 必须是文件
      * @param toPath   必须是文件
-     * @param override
-     *
-     * @return
      */
     public static boolean moveFile(String fromPath, String toPath, boolean override) {
         return moveFile(new File(fromPath), new File(toPath), override);
@@ -92,9 +85,6 @@ public class FileUtil {
      *
      * @param fromFile 必须是文件
      * @param toFile   必须是文件
-     * @param override
-     *
-     * @return
      */
     public static boolean moveFile(File fromFile, File toFile, boolean override) {
         if (toFile.exists()) { //如果目标已经存在
@@ -185,12 +175,10 @@ public class FileUtil {
 
     /**
      * 获取系统临时目录.通过java.io.tmpdir属性获取
-     *
-     * @return
      */
     public static String getTempDir(String relPath) {
         String dir = System.getProperty(TEMP_DIR);
-        if (StringUtil.checkEmpty(dir) == false) {
+        if (!StringUtil.checkEmpty(dir)) {
             dir = "/";
         }
         return Paths.get(dir, relPath).toString().replace('\\', '/');
@@ -531,10 +519,6 @@ public class FileUtil {
 
     /**
      * 是否可以被重命名
-     *
-     * @param f
-     *
-     * @return
      */
     public static boolean isCanRename(String path) {
         File f = new File(path);
@@ -544,11 +528,6 @@ public class FileUtil {
 
     /**
      * 获取重命名的路径.仅修改名称部分,不会更改后缀.例如: (/a.txt,b)=> /b.txt
-     *
-     * @param absPath
-     * @param newName
-     *
-     * @return
      */
     public static String getRenamePath(String absPath, String newName) {
         StringBuilder sb = new StringBuilder();
@@ -566,11 +545,6 @@ public class FileUtil {
 
     /**
      * 获取重命名的路径.包含后缀.例如: (/a.txt,b.exe)=> /b.exe
-     *
-     * @param absPath
-     * @param newName
-     *
-     * @return
      */
     public static String getRenamePathWithExt(String absPath, String newName) {
         StringBuilder sb = new StringBuilder();
@@ -584,11 +558,6 @@ public class FileUtil {
 
     /**
      * 从命名文件.仅改名文件名部分.例如: (/a.txt,b)=> /b.txt
-     *
-     * @param absPath
-     * @param newName
-     *
-     * @return
      */
     public static boolean rename(String absPath, String newName) {
         String newPath = getRenamePath(absPath, newName);
@@ -597,11 +566,6 @@ public class FileUtil {
 
     /**
      * 获取重命名的路径.包含后缀.例如: (/a.txt,b.exe)=> /b.exe
-     *
-     * @param absPath
-     * @param newName
-     *
-     * @return
      */
     public static boolean renameWithExt(String absPath, String newName) {
         String newPath = getRenamePathWithExt(absPath, newName);
@@ -610,11 +574,6 @@ public class FileUtil {
 
     /**
      * 从命名成新路径
-     *
-     * @param absPath
-     * @param newPath
-     *
-     * @return
      */
     public static boolean renameTo(String absPath, String newPath) {
         return new File(absPath).renameTo(new File(newPath));
@@ -622,11 +581,6 @@ public class FileUtil {
 
     /**
      * 通过系统层面获取相对路径,以/进行分割. 是以/开始
-     *
-     * @param dir
-     * @param file
-     *
-     * @return
      */
     public static String getRelPath(File dir, File file) {
         try {
@@ -825,10 +779,6 @@ public class FileUtil {
 
     /**
      * 获取文件名在目录中文件的顺序.不计算目录..从0开始
-     *
-     * @param path
-     *
-     * @return
      */
     public static int getFileIndex(File file) {
         return getFileIndex(file.getParentFile(), file.getName());
@@ -837,10 +787,6 @@ public class FileUtil {
     /**
      * 获取父目录,所有分割符是\	格式:E:\01_J2EE\Test6\WebContent\WEB-INF\classes
      * 返回路径不是以\结束
-     *
-     * @param path
-     *
-     * @return
      */
     public static String getParentDir(String path) {
         return new File(path).getParent();
@@ -855,8 +801,6 @@ public class FileUtil {
      * </pre>
      *
      * @param relPath 相对路径,	/表示class目录
-     *
-     * @return
      */
     protected static String getClassResourcePath(String relPath) {
         URL url = Thread.currentThread().getContextClassLoader().getResource("");
@@ -1036,10 +980,6 @@ public class FileUtil {
 
     /**
      * 获取工作目录,且后面追加相对路径
-     *
-     * @param path
-     *
-     * @return
      */
     public static String getWorkDir(String relPath) {
         Path path = Paths.get(System.getProperty("user.dir"), relPath);
@@ -1048,10 +988,6 @@ public class FileUtil {
 
     /**
      * 获取用户目录,且后面追加相对路径
-     *
-     * @param path
-     *
-     * @return
      */
     public static String getUserDir(String relPath) {
         Path path = Paths.get(System.getProperty("user.home"), relPath);
@@ -1060,10 +996,6 @@ public class FileUtil {
 
     /**
      * 获取路径的文件名部分
-     *
-     * @param path
-     *
-     * @return
      */
     public static String getPathFileName(String path) {
         return new File(path).getName();
@@ -1071,10 +1003,6 @@ public class FileUtil {
 
     /**
      * 获取路径的文件部分不包含后缀名
-     *
-     * @param path
-     *
-     * @return
      */
     public static String getPathFileNameNoExt(String path) {
         String name = getPathFileName(path);
@@ -1217,12 +1145,6 @@ public class FileUtil {
 
     /**
      * 将序列转换成对象
-     *
-     * @param obj
-     *
-     * @return
-     *
-     * @throws IOException
      */
     public static Object parseByteToObject(byte[] buf) throws IOException {
         return parseByteToObject(buf, 0, buf.length);
@@ -1230,12 +1152,6 @@ public class FileUtil {
 
     /**
      * 将序列转换成对象
-     *
-     * @param obj
-     *
-     * @return
-     *
-     * @throws IOException
      */
     public static Object parseByteToObject(byte[] buf, int offset, int length) throws IOException {
         try {
@@ -1249,12 +1165,6 @@ public class FileUtil {
 
     /**
      * 获取目录,不存在时创建,路径是绝对路径
-     *
-     * @param absPath
-     *
-     * @return
-     *
-     * @throws IOException
      */
     public static File createDir(String absPath) throws IOException {
         //		String temp=absPath;
@@ -1527,12 +1437,6 @@ public class FileUtil {
 
     /**
      * 使用gzip方式压缩数据
-     *
-     * @param data
-     *
-     * @return
-     *
-     * @throws IOException
      */
     public static byte[] gzipByte(byte[] buf, int offset, int length) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -1549,14 +1453,6 @@ public class FileUtil {
 
     /**
      * 解压gzip数据
-     *
-     * @param buf
-     * @param offset
-     * @param length
-     *
-     * @return
-     *
-     * @throws IOException
      */
     public static byte[] ungzipByte(byte[] buf, int offset, int length) throws IOException {
         ByteArrayInputStream bis = new ByteArrayInputStream(buf, offset, length);
@@ -1622,9 +1518,6 @@ public class FileUtil {
 
     /**
      * 根据指定名称创建临时文件
-     *
-     * @param fileName
-     * @param exitDel
      */
     public static File createTempFile(boolean exitDel) throws IOException {
         File file = File.createTempFile(FileUtil.class.getSimpleName() + " - ", ".tmp");
@@ -1681,11 +1574,6 @@ public class FileUtil {
 
     /**
      * 对流创建输入监听器
-     *
-     * @param is
-     * @param listeners
-     *
-     * @return
      */
     public static InputStreamReadThread buildReadThread(InputStream is, InputStreamListener... listeners) {
         InputStreamReadThread thread = new InputStreamReadThread(is, listeners);
@@ -1695,11 +1583,6 @@ public class FileUtil {
 
     /**
      * 对流创建输入监听器
-     *
-     * @param is
-     * @param listeners
-     *
-     * @return
      */
     public static SimpleInputStreamReadThread buildSimpleReadThread(InputStream is, InputStreamListener listeners) {
         SimpleInputStreamReadThread thread = new SimpleInputStreamReadThread(is, listeners);
@@ -2153,10 +2036,6 @@ public class FileUtil {
 
     /**
      * 替换文件名称特殊字符
-     *
-     * @param fileName
-     *
-     * @return
      */
     public static String replaceIllegalChar(String fileName) {
         Pattern pattern = Pattern.compile("[\\s\\\\/:\\*\\?\\\"<>\\|]");
@@ -2167,12 +2046,6 @@ public class FileUtil {
 
     /**
      * 创建文件锁
-     *
-     * @param path
-     *
-     * @return
-     *
-     * @throws IOException
      */
     public static FileLock createFileLock(File file) throws IOException {
         FileOutputStream os = new FileOutputStream(file, true);
