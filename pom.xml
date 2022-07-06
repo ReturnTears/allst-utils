@@ -106,6 +106,12 @@
             <version>5.3.5</version>
         </dependency>
 
+        <!-- api接口加密解密依赖 -->
+        <dependency>
+            <groupId>cn.shuibo</groupId>
+            <artifactId>rsa-encrypt-body-spring-boot</artifactId>
+            <version>1.0.1.RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>
