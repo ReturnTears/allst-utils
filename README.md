@@ -23,7 +23,7 @@
 
 ## Alibaba easyexecl
 
-## Regex
+## 正则(Regex)
 [Regex](Regex.md)
 
 ## IDEA2018.x转到IDEA2020.x遇到的问题
