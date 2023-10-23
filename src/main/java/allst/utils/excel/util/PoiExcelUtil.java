@@ -470,10 +470,10 @@ public class PoiExcelUtil {
             boolean isEmpty = true;
             while (it.hasNext()) {
                 Cell cell = it.next();
-                if (cell.getCellType() != Cell.CELL_TYPE_BLANK) {
+                /*if (cell.getCellType() != Cell.CELL_TYPE_BLANK) {
                     isEmpty = false;
                     break;
-                }
+                }*/
             }
             return isEmpty;
         }

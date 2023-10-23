@@ -74,7 +74,7 @@ public class ExcelUtil {
      *
      */
     public static Object readCell(Cell cell) {
-        switch (cell.getCellType()) {
+        /*switch (cell.getCellType()) {
             case Cell.CELL_TYPE_STRING:
                 String str = cell.getRichStringCellValue().getString();
                 return str == null ? "" : str.trim();
@@ -97,7 +97,8 @@ public class ExcelUtil {
             default:
                 System.out.println("Data error for cell of excel: " + cell.getCellType());
                 return "";
-        }
+        }*/
+        return null;
     }
 
     /**
